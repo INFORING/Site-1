@@ -1,6 +1,10 @@
 class Offer < ActiveRecord::Base
  validates :title,  presence: true
  validates :description,  presence: true
+ validates :end_at, presence: true
+ validates :new_price, presence: true
+ validates :old_price, presence: true
+ validates :old_price, presence: true
 
  has_many :features, dependent: :destroy
 

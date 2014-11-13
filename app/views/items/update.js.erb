@@ -1,4 +1,8 @@
+<% if @item.errors.any? %>
+$('#flash').html("<%= escape_javascript(render partial: 'shared/flash_messages', flash: flash) %>");
+<% else %>
 $('#ItemEditModal').modal('hide');
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 $('#items-tab').html("<%= escape_javascript(render partial: 'items/admin_items', locals: {:@items => @items}) %>");
+<% end %>

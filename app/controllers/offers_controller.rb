@@ -14,9 +14,11 @@ class OffersController < ApplicationController
           Feature.create(offer_id: @offer.id, title: feature_titles[i.to_s])        
         end
       end
-      respond_to do |format|
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
         format.js
-      end
     end
   end
 
@@ -62,6 +64,11 @@ class OffersController < ApplicationController
     	respond_to do |format|
       		format.js
     	end
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
+        format.js
     end	
   end
 
@@ -82,7 +89,7 @@ class OffersController < ApplicationController
   end
 
   def order_create
-    Mailer.OfferOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city]).deliver
+    Mailer.OfferOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
     @payment = params[:payment]
     respond_to do |format|
         format.js

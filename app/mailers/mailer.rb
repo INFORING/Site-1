@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
   	mail(to: email, subject: subject)
   end
 
-  def ItemOrder(name,email,phone,payment,id,adress,index,city)
+  def ItemOrder(name,email,phone,payment,id,adress,index,city,comment)
   	@name = name
   	@phone = phone
   	@item = Item.find(id)
@@ -14,6 +14,7 @@ class Mailer < ActionMailer::Base
     @adress = adress
     @index = index
     @city = city
+    @comment = comment
   	if @item.preorder?
   		mail(to: "order@royz-techmag.ru", subject: "Предзаказ #{@item.title}")
   	else  
@@ -21,7 +22,7 @@ class Mailer < ActionMailer::Base
     end
   end
 
-  def OfferOrder(name,email,phone,payment,id,adress,index,city)
+  def OfferOrder(name,email,phone,payment,id,adress,index,city,comment)
     @name = name
     @phone = phone
     @offer = Offer.find(id)
@@ -30,6 +31,7 @@ class Mailer < ActionMailer::Base
     @adress = adress
     @index = index
     @city = city 
+    @comment = comment
     xmail(to: "order@royz-techmag.ru", subject: "Заказ на акцию #{@offer.title}")
   end
 

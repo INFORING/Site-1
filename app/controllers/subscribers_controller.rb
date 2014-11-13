@@ -35,6 +35,7 @@ class SubscribersController < ApplicationController
     @subscribers.each do |s|
     	Mailer.Subscribe(s.name,s.email,params[:text].html_safe,params[:subject]).deliver
     end
+    flash[:success] = "Сообщение отправлено"
     respond_to do |format|
     	format.js
     end

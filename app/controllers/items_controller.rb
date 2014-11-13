@@ -15,9 +15,11 @@ class ItemsController < ApplicationController
           Feature.create(item_id: @item.id, title: feature_titles[i.to_s])        
         end
       end
-      respond_to do |format|
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
         format.js
-      end
     end
   end
   
@@ -61,11 +63,13 @@ class ItemsController < ApplicationController
 	        	Feature.create(title: feature_titles[id], item_id: @item.id)
 	    	  end
 	      end  	
-    	end
-    	respond_to do |format|
-      	format.js
-    	end
-    end	
+      end
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
+        format.js
+    end
   end
 
   def destroy
@@ -90,9 +94,11 @@ class ItemsController < ApplicationController
           Feature.create(item_id: @item.id, title: feature_titles[i.to_s], value: feature_values[i.to_s] )        
         end
       end
-      respond_to do |format|
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
         format.js
-      end
     end
   end
 
@@ -114,10 +120,13 @@ class ItemsController < ApplicationController
 	    	  end
 	      end  	
     	end
-    	respond_to do |format|
-      	format.js
-    	end
-    end	
+      flash[:success] = "Предзаказ обновлён"
+    else
+      flash[:danger] = "Ошибка! Проверьте заполнены ли все поля"
+    end
+    respond_to do |format|
+        format.js
+    end
   end
 
   def order_new
@@ -129,7 +138,7 @@ class ItemsController < ApplicationController
   end
 
   def order_create
-    Mailer.ItemOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city]).deliver
+    Mailer.ItemOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
     @payment = params[:payment]
     respond_to do |format|
         format.js

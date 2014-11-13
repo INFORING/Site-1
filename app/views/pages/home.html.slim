@@ -87,6 +87,7 @@
           h4
             = @offer.old_price.to_i
             |  рублей
+        = button_to 'Заказать', offer_order_new_path(id: @offer.id), class: "btn btn-default",method: :get, remote: true
     .row
       .col-md-12.center-block.count
         h2.text-center До конца акции осталось:

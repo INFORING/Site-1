@@ -1,1 +1,2 @@
+$('#flash').html("<%= escape_javascript(render partial: 'shared/flash_messages', flash: flash) %>");
 $('#preorders-tab').html("<%= escape_javascript(render partial: 'items/admin_preorder', locals: {:@preorder => @item}) %>");
