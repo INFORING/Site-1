@@ -1,0 +1,7 @@
+$('#OfferOrderModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+<%- if @payment == "Предоплата"%>
+	$('#OfferPayment').html("<%= escape_javascript(render partial: 'offers/payment_modal') %>");
+	$('#OfferPaymentModal').modal('show');
+<%- end%>

@@ -1,0 +1,49 @@
+#OfferOrderModal.modal.fade aria-text="true" aria-labelledby="OfferOrderModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-text="true"  &times;
+          span.sr-only Close
+        center  
+          h4#OfferOrderModalLabel.modal-title 
+            | Заказ  
+            = @offer.title 
+        ul.nav.nav-tabs role="tablist" 
+          li.active
+            a data-toggle="tab" href="#payment1-tab" role="tab"  Наложный платёж
+          li
+            a data-toggle="tab" href="#payment2-tab" role="tab"  Предоплата
+      .modal-body
+        .tab-content
+          #payment1-tab.tab-pane.active  
+            center  
+              = form_tag offer_order_create_path(id: @offer.id), method: :get,remote: true do
+                = text_field_tag :name, nil, placeholder: "Ф.И.О"
+                = text_field_tag :email, nil, placeholder: "E-mail"
+                = text_field_tag :phone, nil, placeholder: "Телефон"
+                = text_field_tag :city, nil, placeholder: "Город"
+                = text_field_tag :index, nil, placeholder: "Почтовый индекс"
+                = text_field_tag :adress, nil, placeholder: "Адрес доставки"
+                = hidden_field_tag :payment, "Наложный платёж"
+                = submit_tag 'Наложный платёж', class: "btn btn-default", disable_with: 'Наложный платёж'
+          #payment2-tab.tab-pane
+            center     
+              = form_tag offer_order_create_path(id: @offer.id), method: :get,remote: true do
+                = text_field_tag :name, nil, placeholder: "Ф.И.О"
+                = text_field_tag :email, nil, placeholder: "E-mail"
+                = text_field_tag :phone, nil, placeholder: "Телефон"
+                = text_field_tag :city, nil, placeholder: "Город"
+                = text_field_tag :index, nil, placeholder: "Почтовый индекс"
+                = text_field_tag :adress, nil, placeholder: "Адрес доставки"
+                = hidden_field_tag :payment, "Предоплата"
+                = submit_tag 'Предоплата', class: "btn btn-default", disable_with: 'Предоплата'
+
+        
+      .modal-footer
+          .pull-left
+            | Цена:  
+            = @offer.new_price.to_i
+            |  
+            i.fa.fa-rub
+          button.btn.btn-primary data-dismiss="modal" type="button"  Закрыть

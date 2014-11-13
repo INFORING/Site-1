@@ -1,0 +1,4 @@
+$('#ReviewEditModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#reviews-tab').html("<%= escape_javascript(render partial: 'reviews/admin_reviews', locals: {:@reviews => @reviews}) %>");

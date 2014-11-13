@@ -1,0 +1,7 @@
+<%- unless @item.nil? %>
+$('#ItemOrderModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#ItemOrder').html("<%= escape_javascript(render partial: 'items/order_modal', locals: {:@item => @item}) %>");
+$('#ItemOrderModal').modal('show');
+<%- end %>

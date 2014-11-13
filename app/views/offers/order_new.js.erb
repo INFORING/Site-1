@@ -1,0 +1,4 @@
+<%- unless @offer.nil? %>
+$('#OfferOrder').html("<%= escape_javascript(render partial: 'offers/order_modal', locals: {:@offer => @offer}) %>");
+$('#OfferOrderModal').modal('show');
+<%- end %>

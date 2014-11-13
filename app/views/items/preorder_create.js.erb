@@ -1,0 +1,4 @@
+$('#PreorderCreateModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#preorders-tab').html("<%= escape_javascript(render partial: 'items/admin_preorder', locals: {:@preorder => @item}) %>");

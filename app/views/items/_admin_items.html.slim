@@ -1,0 +1,83 @@
+button.btn.btn-default.btn-sm data-target="#ItemCreateModal" data-toggle="modal" 
+  | Добавить товар       
+table.table
+          thead
+            tr
+              th #
+              th Товар  
+              th Отображение 
+              th  
+          tbody
+           - @count = @items.where(show: true).count
+           - @items.each do |c|
+
+            tr 
+             td 
+              = c.id
+             td 
+              = c.title
+              - if c.preorder?
+                | (Предзаказ)
+             td
+              - unless c.preorder?
+                - if c.show == false
+                  - if @count < 3
+                    = link_to show_item_path(id: c.id, show: true), method: :put, remote: true do
+                      = check_box_tag c.show, ' ',false
+                  -else
+                    = link_to show_item_path(id: c.id, show: true), method: :put, remote: true do
+                      = check_box_tag c.show, ' ',false, disabled: true
+                - else
+                  = link_to show_item_path(id: c.id, show: false), method: :put,remote: true do
+                    = check_box_tag c.show, ' ',true
+             td  
+              = link_to edit_item_path(c),remote: true do 
+                i.fa.fa-pencil.fa-lg
+              |  
+              = link_to item_path(c),method: :delete,remote: true do
+                i.fa.fa-times.fa-lg               
+                  
+
+#ItemCreateModal.modal.fade aria-hidden="true" aria-labelledby="ItemCreateModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        h4#ItemCreateModalLabel.modal-title Новый товар
+      - @i = 0
+      = form_tag items_path, method: :post, :enctype =>"multipart/form-data" ,remote: true do 
+        = hidden_field_tag :authenticity_token, form_authenticity_token  
+        .modal-body
+          .form-group
+            = label_tag :title, "Название" , class: "control-label"
+            = text_field_tag :title ,nil, class: "form-control"
+          .form-group
+            = label_tag :description, "Описание" , class: "control-label"
+            = text_area_tag :description,nil, class: "form-control"
+          form-group
+            = label_tag :price, "Цена" , class: "control-label"
+            = text_field_tag :price,nil, class: "form-control"
+          center
+            | Характеристики
+          .row 
+           .input-group
+            = while @i < 8 do
+               = text_field_tag "feature_titles[#{@i}]"," ",class: "form-control"
+               - @i+=1
+          .form-group 
+            center
+              | Изображение
+            = file_field_tag :image,class: "form-control" 
+
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Добавить", class: "btn btn-primary pull-left"
+#ItemEdit
+
+
+
+
+
+

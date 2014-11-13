@@ -1,0 +1,73 @@
+footer#footer.section
+  .container
+    .row
+      .col-md-3.col-sm-6
+        h4 О нас
+        p 
+          = @contacts[:about].value
+        hr
+          h4 Быстрые ссылки
+          ul.quick-links
+            li
+              = link_to "Главная", "#header"
+            li
+              = link_to "Акция", "#sale"
+            li
+              = link_to "Предзаказ", "#preorder"
+            li
+              = link_to "Отзывы", "#reviews"
+      .col-md-4.col-sm-6
+        .contact-info
+          h4 Как нас найти?
+          p 
+            = @contacts[:info].value
+          ul.contact-list
+            li
+              i.fa.fa-map-marker
+              = @contacts[:adress].value
+            li
+              i.fa.fa-phone
+              = @contacts[:phone].value
+            - unless @contacts[:phone2].value.blank?
+              li
+                i.fa.fa-phone
+                = @contacts[:phone2].value
+            - unless @contacts[:phone3].value.blank?
+              li
+                i.fa.fa-phone
+                = @contacts[:phone3].value
+            li
+              i.fa.fa-envelope-o
+              a href="mailto:#{@contacts[:email].value}" 
+                = @contacts[:email].value
+
+        hr
+          .social
+            h4 Социальные сети
+            ul.social
+              li.facebook
+                = link_to "https://www.facebook.com/aleksandr.royz" do
+                  i.fa.fa-facebook
+              li.twitter
+                = link_to "https://twitter.com/AleksandrVik" do
+                  i.fa.fa-twitter
+              li.google-plus
+                = link_to "https://plus.google.com/u/0/117506942807951273899" do
+                  i.fa.fa-google-plus
+              li.vk
+                = link_to "https://vk.com/id132715088" do 
+                  i.fa.fa-vk
+      .col-md-5.bottom-contact
+        h4 Свяжитесь с нами
+        p 
+          = @contacts[:contact].value
+        #feedback.contact-form
+          = render 'pages/feedback'
+  .container
+    .row.footer-bottom
+      .col-lg-6.col-sm-6
+        p © Royz_TechMag. All Right Reserved
+      .col-lg-6.col-sm-6
+        p.copyright
+          | Created by
+          a href="http://software.inforing73.net"  Inforing Software

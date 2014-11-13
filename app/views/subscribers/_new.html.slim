@@ -1,0 +1,22 @@
+.container
+		.row
+			.col-lg-12
+				.headline
+					h1
+						strong Подписаться
+						|  на новости
+					p Будьте всегда в курсе наших новостей. Новые товары, акции, новинки ждут Вас.
+		.row
+			.col-lg-12
+				center
+					= form_for(@new_subscriber, method: :post, remote:true) do |f|
+						.subscribers-optin
+							.row
+								.form-group.col-md-3
+									= f.text_field :name, placeholder: "Введите Ваше имя", class: "form-control"
+								.form-group.col-md-3
+									= f.text_field :email, placeholder: "Введите Ваш E-mail", class: "form-control"
+								.form-group.col-md-3
+									= f.text_field :phone, placeholder: "Введите Ваш телефон", class: "form-control"
+								.form-group.col-md-3
+									= f.submit 'Подписаться', class: "btn btn-default"

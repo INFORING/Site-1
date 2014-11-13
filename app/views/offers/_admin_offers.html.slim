@@ -1,0 +1,105 @@
+button.btn.btn-default.btn-sm data-target="#OfferCreateModal" data-toggle="modal"  
+  | Добавить акцию        
+table.table
+          thead
+            tr
+              th #
+              th Акция 
+              th Слайдер
+              th Отдельно
+              th Изменить/удалить
+          tbody
+           - @count2 = @offers.where(position: 2).count
+           - @count1 = @offers.where(position: 1).count
+           - @offers.each do |c|
+
+            tr 
+             td 
+              = c.id
+             td 
+              = c.title
+             td 
+                - if c.position != 1
+                  - if @count1 < 2
+                    = link_to offer_position_path(id: c.id, position: 1), method: :put, remote: true do
+                      = check_box_tag c.position, ' ',false
+                  -else
+                    = check_box_tag c.position, ' ',false, disabled: true
+                - else
+                  = link_to offer_position_path(id: c.id, position: 0), method: :put,remote: true do
+                    = check_box_tag c.position, ' ',true
+             td    
+                - if c.position != 2
+                  - if @count2 < 1
+                    = link_to offer_position_path(id: c.id, position: 2), method: :put, remote: true do
+                      = check_box_tag c.position, ' ',false
+                  -else
+                    = check_box_tag c.position, ' ',false, disabled: true
+                - else
+                  = link_to offer_position_path(id: c.id, position: 0), method: :put,remote: true do
+                    = check_box_tag c.position, ' ',true
+             td  
+              = link_to edit_offer_path(c),remote: true do 
+                i.fa.fa-pencil.fa-lg
+              |  
+              = link_to offer_path(c),method: :delete,remote: true do
+                i.fa.fa-times.fa-lg               
+                  
+
+#OfferCreateModal.modal.fade aria-hidden="true" aria-labelledby="OfferCreateModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        h4#OfferCreateModalLabel.modal-title Новый товар
+      - @i = 0
+      = form_tag offers_path, method: :post, :enctype =>"multipart/form-data" ,remote: true do 
+        = hidden_field_tag :authenticity_token, form_authenticity_token  
+        .modal-body
+          .form-group
+            = label_tag :title, "Название" , class: "control-label"
+            = text_field_tag :title ," ", class: "form-control"
+          .form-group
+            = label_tag :description, "Описание" , class: "control-label"
+            = text_area_tag :description," ", class: "form-control"
+          center
+            | Пункты
+          .row 
+           .input-group
+            = while @i < 3 do
+               = text_field_tag "feature_titles[#{@i}]"," ",class: "form-control"
+               -@i += 1
+          center
+            | Цена 
+          .row  
+            .input-group
+              .col-lg-6
+                center
+                  = label_tag :title, "Старая цена" , class: "control-label"
+                  = text_field_tag :old_price, " ", class: "form-control"
+              .col-lg-6
+                center
+                  = label_tag :title, "Новая цена" , class: "control-label"
+                  = text_field_tag :new_price, " ", class: "form-control"
+          center
+            | Дата окончания
+            .input_group
+               = date_field_tag :end_at
+
+          .form-group 
+            center
+              | Изображение
+            = file_field_tag :image,class: "form-control" 
+
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Добавить", class: "btn btn-primary pull-left"
+#OfferEdit
+
+
+
+
+
+

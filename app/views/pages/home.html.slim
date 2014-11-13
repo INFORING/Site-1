@@ -1,0 +1,179 @@
+= render 'layouts/header'
+
+/ Товары
+#banner
+  .banner-inner
+    .container
+      .row
+        #banner-carousel.carousel.slide data-ride="carousel"
+          ol.carousel-indicators
+            - @count = 0
+            - @items.each do |i|
+              = content_tag :li, :class => ("active" if @count == 0;) , :"data-slide-to" => "#{@count}", :"data-target" => "#banner-carousel" do
+              - @count += 1
+            - @offers.each do |o|
+              li data-slide-to = "#{@count}" data-target = "#banner-carousel"
+              - @count += 1
+            - @count = 0
+          .carousel-inner
+            - @items.each do |i|
+              div class = "#{count_tag(@count)}"
+                .row
+                  .col-xs-5.text-center
+                    = link_to show_picture_path(image: i.image.url(:large)),method: :get, remote: true do 
+                      = image_tag i.image.url(:medium), class: "img-responsive"
+                  .col-xs-7
+                    h2
+                      = i.title
+                    p 
+                      = i.description
+                    ul.green
+                      - i.features.each do |f|
+                        li
+                          = f.title
+                    h3.price.pull-right
+                      = i.price.to_i
+                      |  
+                      i.fa.fa-rub
+                - @count += 1
+                center
+                    .banner-optin
+                      .row
+                        .col-md-4.col-md-offset-4
+                          = button_to 'Заказать', order_new_path(id: i.id), class: "btn btn-default",method: :get, remote: true
+            - @offers.each do |o|
+              .item
+                .row
+                  .col-xs-5.text-center 
+                    = link_to show_picture_path(image: o.image.url(:large)),method: :get, remote: true do 
+                      = image_tag o.image.url(:medium), class: "img-responsive"
+                  .col-xs-7
+                    h2
+                      = o.title
+                    p
+                      = o.description
+                    h3
+                      = o.new_price.to_i
+                      |  рублей
+                    h4
+                      = o.old_price.to_i
+                      |  рублей
+                center
+                    .banner-optin
+                      .row
+                        .col-md-4.col-md-offset-4
+                          = button_to 'Заказать', offer_order_new_path(id: o.id), class: "btn btn-default",method: :get, remote: true
+
+/Акция
+#sale.section
+  - unless @offer.nil?
+    .row
+      .col-lg-6.col-md-6
+         = link_to show_picture_path(image: @offer.image.url(:large)),method: :get, remote: true do   
+          = image_tag @offer.image.url(:medium), class: "img-responsive"
+      .col-lg-6.col-md-6
+        h2
+          = @offer.title
+        p 
+          = @offer.description
+        ul.normal-list
+          - @offer.features.each do |f|
+            li
+              = f.title
+        .text-center
+          h3
+            = @offer.new_price.to_i
+            |  рублей
+          h4
+            = @offer.old_price.to_i
+            |  рублей
+    .row
+      .col-md-12.center-block.count
+        h2.text-center До конца акции осталось:
+        ul.countdown
+          li
+            = distance_of_time_in_words(Time.now, @offer.end_at - 4.hours, false, :except => [:minutes, :hours,:seconds],:accumulate_on => :days).delete('days')
+            span Дней
+          li
+            = distance_of_time_in_words(Time.now, @offer.end_at - 4.hours, false, :except => [:days, :minutes,:months,:seconds]).delete('hours')
+            span Часов
+          li
+            = distance_of_time_in_words(Time.now, @offer.end_at - 4.hours, false, :except => [:days, :hours,:months,:seconds]).delete('minutes')
+            span Минут
+
+/Предзаказ
+#preorder.section
+  - unless @preorder.nil?
+    .container
+      .row
+        .col-lg-12
+          .headline
+            h1
+              strong Предзаказ!
+              |  
+              = @preorder.title
+            p 
+              = @preorder.description
+      .row
+        .col-lg-8.col-md-8
+          .row
+            - @preorder.features.each do |f|
+              .col-lg-6.col-md-6
+                .features-list
+                  i.fa.fa-gears.fa-5x
+                  h4 
+                    = f.title
+                  p 
+                    = f.value
+        .col-lg-4.col-md-4
+          = link_to show_picture_path(image: @preorder.image.url(:large)),method: :get, remote: true do 
+            = image_tag @preorder.image.url(:medium), class: "img-responsive"
+      center
+        .preorder-optin
+          .row
+            .col-md-4.col-md-offset-4
+              = button_to 'Предзаказ', order_new_path(id: @preorder.id), class: "btn btn-default",method: :get, remote: true
+
+/Подписка
+#subscribers.section
+  = render 'subscribers/new', locals: {:@new_subscriber => @new_subscriber}
+
+/Отзывы
+#reviews.section
+  = render 'reviews/show', locals: {:@reviews => @reviews}
+
+/Вопрос - ответ
+- unless @faq.empty?
+  #faq.section
+    .container
+      .row
+        .col-lg-12
+          .headline
+            h1 Вопрос - Ответ
+            p Тут Вы можете найти самые распространненые вопросы наших покупателей и ответы на них.
+      .row
+        .col-lg-7.col-md-7
+          - @count = 0
+          - @faq.each do |f|
+            .panel
+              .panel-heading
+                h4.panel-title
+                  a.panel-toggle data-parent="#accordion" data-toggle="collapse" href="#{faq_href_tag(@count)}" 
+                    i.fa.fa-plus-square
+                    = f.question
+              .panel-collapse.collapse id="#{faq_tag(@count)}"
+                .panel-body
+                  p 
+                    = f.answer
+            - @count += 1
+        .col-lg-5.col-md-5
+          = image_tag "faq.png", class: "img-responsive"
+
+= render 'layouts/footer'
+
+= render 'layouts/upper'
+
+#ItemOrder
+#ItemPayment
+#OfferOrder
+#Picture

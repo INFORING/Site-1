@@ -1,0 +1,2 @@
+$('#ReviewEdit').html("<%= escape_javascript(render partial: 'reviews/edit_modal', locals: {:@review => @review}) %>");
+$('#ReviewEditModal').modal('show');

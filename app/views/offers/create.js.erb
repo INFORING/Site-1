@@ -1,0 +1,4 @@
+$('#OfferCreateModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#offers-tab').html("<%= escape_javascript(render partial: 'offers/admin_offers', locals: {:@offers => @offers}) %>");

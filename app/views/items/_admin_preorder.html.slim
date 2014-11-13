@@ -1,0 +1,91 @@
+- if @preorder.nil?
+  center
+    button.btn.btn-default.btn-sm data-target="#PreorderCreateModal" data-toggle="modal" Добавить предзаказ
+
+  #PreorderCreateModal.modal.fade aria-hidden="true" aria-labelledby="PreorderCreateModalLabel" role="dialog" tabindex="-1" 
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close data-dismiss="modal" type="button" 
+            span aria-hidden="true"  &times;
+            span.sr-only Close
+          h4#PreorderCreateModalLabel.modal-title Новый товар
+        - @i = 0
+        = form_tag preorder_create_path, method: :post, :enctype =>"multipart/form-data" ,remote: true do 
+          = hidden_field_tag :authenticity_token, form_authenticity_token  
+          .modal-body
+            .form-group
+              = label_tag :title, "Название" , class: "control-label"
+              = text_field_tag :title ,nil, class: "form-control"
+            .form-group
+              = label_tag :description, "Описание" , class: "control-label"
+              = text_area_tag :description,nil, class: "form-control"
+            center
+              | Поля
+            .row 
+             .input-group
+              = while @i < 4 do
+                .col-md-6
+                   = text_field_tag "feature_titles[#{@i}]",nil,class: "form-control"
+                .col-md-6   
+                   = text_field_tag "feature_values[#{@i}]",nil,class: "form-control"
+                - @i+=1
+            .form-group 
+              center
+                | Изображение
+              = file_field_tag :image,class: "form-control" 
+
+          .modal-footer
+            button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+            = submit_tag "Добавить", class: "btn btn-primary pull-left" 
+- else 
+  center  
+    = form_tag preorder_update_path(id: @preorder.id),remotipart_submitted: true ,method: :put, :enctype =>"multipart/form-data", remote: true do      
+      table.table
+        tbody
+          tr
+            td
+              | Название
+            td
+              .form-group
+                = text_field_tag :title, @preorder.title, class: "form-control"
+          tr
+            td
+              | Описание
+            td
+              .form-group
+                = text_area_tag :description, @preorder.description, class: "form-control"
+          tr 
+            td 
+              | Поля
+            td
+              .row 
+                .input-group
+                  - @count = 0
+                  - @preorder.features.each do |f|
+                    .col-md-6
+                      = text_field_tag "feature_titles[#{f.id}]",f.title,class: "form-control"
+                    .col-md-6
+                      = text_field_tag "feature_values[#{f.id}]",f.value,class: "form-control"
+                    - @count+=1
+                  - while @count < 4
+                    .col-md-6
+                      = text_field_tag "feature_titles[#{@count + 44000}]",nil,class: "form-control"
+                    .col-md-6
+                      = text_field_tag "feature_values[#{@count + 44000}]",nil,class: "form-control"
+                    - @count+=1
+          tr  
+            td
+              | Изображение
+            td
+              .col-md-4
+                = image_tag @preorder.image.url(:thumb)
+                = file_field_tag :image,value: @preorder.image,class: "form-control" 
+          tr
+            td
+            td
+              .col-md-6.col-md-offset-5   
+                = submit_tag "Подтвердить", class: "btn btn-primary pull-left" 
+                
+
+

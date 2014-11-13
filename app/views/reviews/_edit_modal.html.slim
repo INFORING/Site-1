@@ -1,0 +1,25 @@
+#ReviewEditModal.modal.fade aria-hidden="true" aria-labelledby="ReviewEditModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+          h4#ReviewEditModalLabel.modal-title Редактировать вопрос
+      - @count = 0
+      = form_tag review_path(@review), method: :put,:enctype =>"multipart/form-data",remote: true do   
+        .modal-body
+         .form-group
+            = label_tag :name, "Имя" , class: "control-label"
+            = text_field_tag :name ,@review.name, class: "form-control"
+         .form-group
+            = label_tag :text, "Озыв" , class: "control-label"
+            = text_area_tag :text,@review.text, class: "form-control"
+         .form-group
+            = label_tag :image, "Изображение",class: "control-label"
+            = image_tag @review.image.url(:thumb)
+            = file_field_tag :image,value: @review.image, class: "form-control"
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Применить", class:  "button btn btn-primary pull-left"  

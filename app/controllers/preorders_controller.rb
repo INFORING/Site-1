@@ -1,0 +1,2 @@
+class PreordersController < ApplicationController
+end

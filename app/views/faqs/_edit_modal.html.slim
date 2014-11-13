@@ -1,0 +1,22 @@
+#FaqEditModal.modal.fade aria-hidden="true" aria-labelledby="FaqEditModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+          h4#FaqEditModalLabel.modal-title Редактировать вопрос
+      - @count = 0
+      = form_tag faq_path(@faq), method: :put,remote: true do   
+        .modal-body
+         .form-group
+            = label_tag :question, "Вопрос" , class: "control-label"
+            = text_field_tag :question ,@faq.question, class: "form-control"
+         .form-group
+            = label_tag :answer, "Ответ" , class: "control-label"
+            = text_area_tag :answer,@faq.answer, class: "form-control"
+
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Применить", class:  "button btn btn-primary pull-left"  

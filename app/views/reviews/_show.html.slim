@@ -1,0 +1,59 @@
+.container
+    .row
+      .col-lg-12
+        .headline
+          h1
+            | Отзывы
+            strong  покупателей 
+          p Узнай, что думают о нас Наши покупатели. 
+    .row
+      - unless @reviews.empty? 
+        .col-md-8
+          #reviews-carousel.carousel.slide data-ride="carousel" 
+            ol.carousel-indicators
+              - @count = 0
+              - @reviews.each do |i|
+                = content_tag :li, :class => ("active" if @count == 0;) , :"data-slide-to" => "#{@count}", :"data-target" => "#reviews-carousel" do
+                - @count += 1
+              - @count = 0
+            .carousel-inner
+              - @reviews.each do |i|
+                div class = "#{count_tag(@count)}"
+                  row
+                    .col-lg-12
+                      .reviews-inner
+                        = image_tag i.image.url(:thumb)
+                        p 
+                          = i.text
+                        small
+                          = i.name
+                  - @count += 1
+        .col-md-4
+          = form_for(@new_review, method: :post, remote:true) do |f|
+            .reviews-optin
+              .row
+                .form-group
+                  = f.text_field :name, placeholder: "Введите Ваше имя", class: "form-control"
+                .form-group
+                  = f.text_area :text, col: "5", placeholder: "Введите Ваш отзыв", class: "form-control"
+                .form-group
+                  = f.text_field :email, col: "5", placeholder: "Ваш e-mail", class: "form-control"
+                .form-group
+                  = f.file_field :image, class: "form-control"
+                .form-group
+                  = f.submit "Отправить", class: "btn btn-default"
+      - else
+        .col-md-6.col-md-offset-3
+          = form_for(@new_review, method: :post, remote:true) do |f|
+            .reviews-optin
+              .row
+                .form-group
+                  = f.text_field :name, placeholder: "Введите Ваше имя", class: "form-control"
+                .form-group
+                  = f.text_area :text, col: "5", placeholder: "Введите Ваш отзыв", class: "form-control"
+                .form-group
+                  = f.text_field :email, col: "5", placeholder: "Ваш e-mail", class: "form-control"
+                .form-group
+                  = f.file_field :image, class: "form-control"
+                .form-group
+                  = f.submit "Отправить", class: "btn btn-default"

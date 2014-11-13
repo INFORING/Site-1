@@ -1,0 +1,12 @@
+<% if !@item.preorder? %>
+<p>Заказ на <%= @item.title %>
+<% else %>
+<p>Предзаказ на <%= @item.title %>
+<% end %>	
+<p>Имя: <%= @name %>
+<p>E-mail: <%= @email %>
+<p>Телефон: <%= @phone %>
+<p>Способ оплаты: <%= @payment %>
+<p>Город: <%= @city %>
+<p>Адрес: <%= @adress %>
+<p>Индекс: <%= @index %> 

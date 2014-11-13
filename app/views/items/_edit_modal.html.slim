@@ -1,0 +1,41 @@
+#ItemEditModal.modal.fade aria-hidden="true" aria-labelledby="ItemEditModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+          h4#ItemEditModalLabel.modal-title Редактировать товар
+      - @count = 0
+      = form_tag item_path(@item), method: :put,:enctype =>"multipart/form-data" ,remote: true do   
+        .modal-body
+         .form-group
+            = label_tag :title, "Название" , class: "control-label"
+            = text_field_tag :title ,@item.title, class: "form-control"
+         .form-group
+            = label_tag :description, "Описание" , class: "control-label"
+            = text_area_tag :description,@item.description, class: "form-control"
+         .form-group
+            = label_tag :price, "Цена" , class: "control-label"
+            = text_field_tag :price ,@item.price, class: "form-control"
+         center
+           | Характеристики
+         .row 
+           .input-group
+             - @item.features.each do |f|
+               = text_field_tag "feature_titles[#{f.id}]",f.title,class: "form-control"
+               - @count+=1
+             - while @count < 8
+               = text_field_tag "feature_titles[#{@count + 44000}]"," ",class: "form-control"
+               - @count += 1
+         center
+           | Изображение
+         center
+           = image_tag @item.image.url(:thumb)
+         .form-group 
+            = file_field_tag :image,value: @item.image,class: "form-control" 
+
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Применить", class:  "button btn btn-primary pull-left"  

@@ -1,0 +1,4 @@
+$('#FaqEditModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#faq-tab').html("<%= escape_javascript(render partial: 'faqs/admin_faq', locals: {:@faqs => @faqs}) %>");

@@ -1,0 +1,2 @@
+$('#reviews').html("<%= escape_javascript(render partial: 'reviews/show', locals: {:@reviews => @reviews, :@new_review => @new_review}) %>");
+$('#flash').html("<%= escape_javascript(render partial: 'shared/flash_messages', flash: flash) %>");

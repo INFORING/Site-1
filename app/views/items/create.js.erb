@@ -1,0 +1,4 @@
+$('#ItemCreateModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#items-tab').html("<%= escape_javascript(render partial: 'items/admin_items', locals: {:@items => @items}) %>");

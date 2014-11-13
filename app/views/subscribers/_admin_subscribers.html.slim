@@ -1,0 +1,43 @@
+| Подписчиков:  
+= @subscribers.count
+button.btn.btn-default.btn-sm data-target="#SubscribeModal" data-toggle="modal"  
+  | Рассылка 
+table.table
+          thead
+            tr
+              th Имя  
+              th E-mail 
+              th Телефон
+              th
+          tbody
+           - @subscribers.each do |c|
+            tr 
+             td 
+              = c.name
+             td 
+              = c.email
+             td
+              = c.phone
+             td  
+              = link_to subscriber_path(c),method: :delete,remote: true do
+                i.fa.fa-times.fa-lg   
+#SubscribeModal.modal.fade aria-hidden="true" aria-labelledby="SubscribeModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+          h4#SubscribeModalLabel.modal-title Рассылка
+      = form_tag subscribe_path, method: :get,remote: true do   
+        .modal-body
+         .form-group
+            = label_tag :subject, "Заголовок" , class: "control-label"
+            = text_field_tag :subject ,nil, class: "form-control"
+         .form-group
+            = label_tag :text, "Текст" , class: "control-label"
+            = text_area_tag :text,nil, class: "form-control"
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag 'Отправить', class: "button btn btn-primary pull-left",disable_with: 'Отправить'  

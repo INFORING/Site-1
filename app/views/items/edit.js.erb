@@ -1,0 +1,2 @@
+$('#ItemEdit').html("<%= escape_javascript(render partial: 'items/edit_modal', locals: {:@item => @item}) %>");
+$('#ItemEditModal').modal('show');

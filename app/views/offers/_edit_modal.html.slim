@@ -1,0 +1,54 @@
+#OfferEditModal.modal.fade aria-hidden="true" aria-labelledby="OfferEditModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+          h4#OfferEditModalLabel.modal-title Редактировать товар
+      - @count = 0
+      = form_tag offer_path(@offer), method: :put,:enctype =>"multipart/form-data" ,remote: true do   
+        .modal-body
+         .form-group
+            = label_tag :title, "Название" , class: "control-label"
+            = text_field_tag :title ,@offer.title, class: "form-control"
+         .form-group
+            = label_tag :description, "Описание" , class: "control-label"
+            = text_area_tag :description,@offer.description, class: "form-control"
+         center
+           | Пункты
+         .row 
+           .input-group
+             - @offer.features.each do |f|
+               = text_field_tag "feature_titles[#{f.id}]",f.title,class: "form-control"
+               - @count += 1
+             - while @count < 3
+               = text_field_tag "feature_titles[#{@count + 44000}]"," ",class: "form-control"
+               - @count += 1
+           center
+            | Цена 
+           .row  
+              .input-group
+                .col-lg-6
+                  center
+                    = label_tag :title, "Старая цена" , class: "control-label"
+                    = text_field_tag :old_price, @offer.old_price, class: "form-control"
+                .col-lg-6
+                  center
+                    = label_tag :title, "Новая цена" , class: "control-label"
+                    = text_field_tag :new_price, @offer.new_price, class: "form-control"
+         center
+            | Дата окончания
+         .input_group
+               = date_field_tag :end_at,@offer.end_at, class: "form-control"
+         center
+           | Изображение
+         center
+           = image_tag @offer.image.url(:thumb)
+         .form-group 
+            = file_field_tag :image,value: @offer.image,class: "form-control" 
+
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
+          = submit_tag "Применить", class:  "button btn btn-primary pull-left"  

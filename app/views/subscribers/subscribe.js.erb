@@ -1,0 +1,4 @@
+$('#SubscribeModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$('#subscribers-tab').html("<%= escape_javascript(render partial: 'subscribers/admin_subscribers', locals: {:@subscribers => @subscribers}) %>");

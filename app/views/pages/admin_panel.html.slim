@@ -1,0 +1,34 @@
+ul.nav.nav-tabs role="tablist" 
+  li
+    = link_to "Перейти на сайт", root_path
+  li.active
+    a data-toggle="tab" href="#items-tab" role="tab"  Товары 
+  li
+    a data-toggle="tab" href="#offers-tab" role="tab"  Акции
+  li
+    a data-toggle="tab" href="#preorders-tab" role="tab"  Предзаказ
+  li
+    a data-toggle="tab" href="#faq-tab" role="tab"  Вопросы
+  li 
+    a data-toggle="tab" href="#subscribers-tab" role="tab"  Подписчики
+  li
+    a data-toggle="tab" href="#reviews-tab" role="tab"  Отзывы
+  li
+    a data-toggle="tab" href="#options-tab" role="tab"  Настройки
+  li
+    = link_to "Выйти", admin_session_destroy_path
+.tab-content
+  #items-tab.tab-pane.active
+   = render 'items/admin_items', locals: {:@items => @items} 
+  #offers-tab.tab-pane
+   = render 'offers/admin_offers', locals: {:@offers => @offers} 
+  #preorders-tab.tab-pane 
+   = render 'items/admin_preorder', locals: {:@preorder => @preorder}
+  #faq-tab.tab-pane 
+   = render 'faqs/admin_faq', locals: {:@faqs => @faqs}
+  #subscribers-tab.tab-pane
+   = render 'subscribers/admin_subscribers', locals: {:@subscribers => @subscribers}
+  #reviews-tab.tab-pane 
+   = render 'reviews/admin_reviews', locals: {:@reviews => @reviews}
+  #options-tab.tab-pane
+   = render 'pages/admin_options', locals: {:@adress => @adress,:@phone => @phone,:@email => @email,:@phone2 => @phone2,:@phone3 => @phone3,:@info => @info}

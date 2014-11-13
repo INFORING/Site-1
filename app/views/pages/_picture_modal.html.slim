@@ -1,0 +1,10 @@
+#PictureModal.modal.fade aria-hidden="true" aria-labelledby="PictureModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-hidden="true"  &times;
+          span.sr-only Close
+        center  
+      .modal-body
+        = image_tag @image_url
