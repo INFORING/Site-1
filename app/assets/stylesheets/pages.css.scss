@@ -180,6 +180,36 @@
 			}
 		}
 	}
+
+	.offer-optin {
+		padding: 20px;
+		background: rgba(0, 0, 0, 0.5);
+		-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+		-moz-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+		box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+		.btn {
+		  width: 100%; 
+		  text-align: center; 
+		  color: #fff; 
+		  padding: 15px 0; 
+		  background: #00a8d6; 
+		  border: none; 
+		  transition: all 0.2s ease-in-out; 
+		  -moz-transition: all 0.2s ease-in-out; 
+		  -webkit-transition: all 0.2s ease-in-out; 
+		  -o-transition: all 0.2s ease-in-out; 
+		  font-weight: bold; 
+		  border-radius: 0;
+		}
+
+		.btn-default {
+			&:hover {
+		  	background: #0396cf; 
+		  	color: #fff;
+		  }
+		}
+	}
 }
 
 /* Pre-order */

@@ -88,7 +88,7 @@
             = @offer.old_price.to_i
             |  рублей
         center
-          .banner-optin
+          .offer-optin
             .row
               .col-md-4.col-md-offset-4
                 = button_to 'Заказать', order_new_path(id: @offer.id), class: "btn btn-default",method: :get, remote: true
