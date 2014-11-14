@@ -22,7 +22,7 @@ button.btn.btn-default.btn-sm data-target="#FaqCreateModal" data-toggle="modal"
               = c.answer
              td
               - if c.show == false
-                - if @count < 4
+                - if @count < 6
                   = link_to show_faq_path(id: c.id, show: true), method: :put, remote: true do
                     = check_box_tag c.show, nil,false
                 -else

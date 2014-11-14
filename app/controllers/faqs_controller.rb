@@ -14,7 +14,7 @@ class FaqsController < ApplicationController
   def show_faq
   	@faq = Faq.find(params[:id])
     @faqs = Faq.all
-    @faq.update_attributes(show: to_boolean(params[:show])) if Faq.where(show: true).count < 4 and to_boolean(params[:show]) or to_boolean(params[:show]) == false
+    @faq.update_attributes(show: to_boolean(params[:show])) if Faq.where(show: true).count < 6 and to_boolean(params[:show]) or to_boolean(params[:show]) == false
     respond_to do |format|
     	format.js
     end
