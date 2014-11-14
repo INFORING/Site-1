@@ -32,7 +32,7 @@ class Mailer < ActionMailer::Base
     @index = index
     @city = city 
     @comment = comment
-    xmail(to: "order@royz-techmag.ru", subject: "Заказ на акцию #{@offer.title}")
+    mail(to: "order@royz-techmag.ru", subject: "Заказ на акцию #{@offer.title}")
   end
 
   def Feedback(name,email,phone,text)

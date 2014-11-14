@@ -138,8 +138,14 @@ class ItemsController < ApplicationController
   end
 
   def order_create
-    Mailer.ItemOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
-    @payment = params[:payment]
+    unless params[:name].blank? or params[:email].blank? or params[:phone].blank? or params[:adress].blank? or params[:city].blank? or params[:index].blank?
+      Mailer.ItemOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
+      @payment = params[:payment]
+      @deliver = 1
+    else
+      flash[:danger] = "Все поля должны быть заполнены"
+      @deliver = 0
+    end
     respond_to do |format|
         format.js
     end
