@@ -6,12 +6,15 @@ html
     = content_tag(:meta, nil, name: 'viewport', content: 'width=device-width, initial-scale=1')
     = content_tag(:meta, nil, name: 'geo.country', content: 'ru')
     = content_tag(:meta, nil, name: 'geo.placename', content: 'Ulyanovsk')
+    = content_tag(:meta, nil, name: 'yandex-verification', content: '662e548f526748e7')
+    /= content_tag(:meta, nil, name: 'google-site-verification', content: 'iTKUXaHM7ejOdpa_ScFAj3ccBM-d1sDcD_u55ROi264')
     
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
 
+    = render 'layouts/shim'
   body data-spy="scroll" data-target=".navigation"
     #flash
     = yield
