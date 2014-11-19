@@ -1,4 +1,17 @@
 module ApplicationHelper
+  def full_title(page_title)
+    base_title = "Интернет-магазин цифровой техники Royz-TechMag Ульяновск"
+    if page_title.empty?
+      base_title
+    else
+      "#{page_title} | #{base_title}"
+    end
+  end
+
+  def full_description(items)
+    "Мы занимаемся продажей качественных и недорогих гаджетов: " + items.map {|i| "#{i.title}"}.join(', ')
+  end
+
   def to_boolean(str)
      str == "true" or str == "1"
   end

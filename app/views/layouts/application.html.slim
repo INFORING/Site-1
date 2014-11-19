@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title LandingPage
+    title = full_title(yield(:title))
     = content_tag(:meta, nil, name: 'description', content: yield(:description))
     = content_tag(:meta, nil, name: 'viewport', content: 'width=device-width, initial-scale=1')
     = content_tag(:meta, nil, name: 'geo.country', content: 'ru')

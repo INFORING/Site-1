@@ -3,3 +3,9 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
 # Disallow: /
+
+User-agent: *
+Disallow: /admin_panel
+Disallow: /admin/signin
+
+Sitemap: http://royz-techmag.ru/sitemap.xml
