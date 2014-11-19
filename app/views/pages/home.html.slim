@@ -24,7 +24,7 @@
                 .row
                   .col-xs-5.text-center
                     = link_to show_picture_path(image: i.image.url(:large)),method: :get, remote: true do 
-                      = image_tag i.image.url(:medium), class: "img-responsive"
+                      = image_tag i.image.url(:medium), alt: i.title, class: "img-responsive"
                   .col-xs-7
                     h2
                       = i.title
@@ -73,7 +73,7 @@
     .row
       .col-lg-6.col-md-6
          = link_to show_picture_path(image: @offer.image.url(:large)),method: :get, remote: true do   
-          = image_tag @offer.image.url(:medium), class: "img-responsive"
+          = image_tag @offer.image.url(:medium), alt: @offer.title, class: "img-responsive"
       .col-lg-6.col-md-6
         h2
           = @offer.title
@@ -135,7 +135,7 @@
                     = f.value
         .col-lg-4.col-md-4
           = link_to show_picture_path(image: @preorder.image.url(:large)),method: :get, remote: true do 
-            = image_tag @preorder.image.url(:medium), class: "img-responsive"
+            = image_tag @preorder.image.url(:medium), alt: @preorder.title, class: "img-responsive"
       center
         .preorder-optin
           .row
@@ -175,7 +175,7 @@
                     = f.answer
             - @count += 1
         .col-lg-5.col-md-5
-          = image_tag "faq.png", class: "img-responsive"
+          = image_tag "faq.png", alt: "Где купить дешевый смартфон или планшет?", class: "img-responsive"
 
 = render 'layouts/footer'
 
