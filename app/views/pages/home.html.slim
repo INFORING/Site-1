@@ -49,7 +49,7 @@
                 .row
                   .col-xs-5.text-center 
                     = link_to show_picture_path(image: o.image.url(:large)),method: :get, remote: true do 
-                      = image_tag o.image.url(:medium), class: "img-responsive"
+                      = image_tag o.image.url(:medium), alt: o.title, class: "img-responsive"
                   .col-xs-7
                     h2
                       = o.title
