@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-	before_action :admin_user, only: [:create,:show_review,:edit,:update,:destroy]
+	before_action :admin_user, only: [:edit,:update,:destroy]
 	include ApplicationHelper
 
 	def create
