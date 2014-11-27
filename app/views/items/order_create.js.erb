@@ -3,7 +3,7 @@
 	$('body').removeClass('modal-open');
 	$('.modal-backdrop').remove();
 	<%- if @payment == "Предоплата"%>
-		$('#ItemPayment').html("<%= escape_javascript(render partial: 'items/payment_modal') %>");
+		$('#ItemPayment').html("<%= escape_javascript(render partial: 'items/payment_modal', locals: {:@item => @item}) %>");
 		$('#ItemPaymentModal').modal('show');
 	<%- end%>
 <% else %>

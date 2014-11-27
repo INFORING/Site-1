@@ -44,6 +44,7 @@
                 = text_field_tag :adress, nil, placeholder: "Адрес доставки"
                 = text_area_tag :comment, nil, placeholder: "Комментарий"
                 = hidden_field_tag :payment, "Предоплата"
+                = hidden_field_tag :item, @item.id
                 = submit_tag 'Предоплата', class: "btn btn-default", disable_with: 'Предоплата'
 
         

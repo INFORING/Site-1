@@ -1,0 +1,16 @@
+#OfferPaymentModal.modal.fade aria-text="true" aria-labelledby="OfferPaymentModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button" 
+          span aria-text="true"  &times;
+          span.sr-only Close
+        center  
+          h4#OfferPaymentModalLabel.modal-title Оплатить заказ
+      .modal-body  
+        center
+          <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=41001972522244&quickpay=shop&payment-type-choice=on&writer=seller&targets=%D0%9E%D0%BF%D0%BB%D0%B0%D1%82%D0%B0+%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0&targets-hint=&default-sum=#{@offer.new_price.to_i - (@offer.new_price.to_i/50)}&button-text=01&fio=on&mail=on&phone=on&address=on&successURL=http%3A%2F%2Froyz-techmag.ru%2F" width="450" height="198"></iframe>
+
+        
+      .modal-footer
+          button.btn.btn-primary data-dismiss="modal" type="button"  Закрыть

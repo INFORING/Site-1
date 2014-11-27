@@ -89,6 +89,7 @@ class OffersController < ApplicationController
   end
 
   def order_create
+    @offer = Offer.find(params[:id])
     unless params[:name].blank? or params[:email].blank? or params[:phone].blank? or params[:adress].blank? or params[:city].blank? or params[:index].blank?
       Mailer.OfferOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
       @payment = params[:payment]
