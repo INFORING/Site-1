@@ -61,17 +61,6 @@ ActiveRecord::Schema.define(version: 20141103215947) do
     t.datetime "end_at"
   end
 
-  create_table "preorders", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-  end
-
   create_table "reviews", force: true do |t|
     t.text     "text"
     t.datetime "created_at"

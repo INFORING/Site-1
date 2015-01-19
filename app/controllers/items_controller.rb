@@ -138,7 +138,7 @@ class ItemsController < ApplicationController
   end
 
   def order_create
-    @item = Item.find(params[:item])
+    @item = Item.find(params[:id])
     unless params[:name].blank? or params[:email].blank? or params[:phone].blank? or params[:adress].blank? or params[:city].blank? or params[:index].blank?
       Mailer.ItemOrder(params[:name],params[:email],params[:phone],params[:payment],params[:id],params[:adress],params[:index],params[:city],params[:comment]).deliver
       @payment = params[:payment]

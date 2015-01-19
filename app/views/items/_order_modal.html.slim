@@ -1,57 +1,57 @@
 #ItemOrderModal.modal.fade aria-text="true" aria-labelledby="ItemOrderModalLabel" role="dialog" tabindex="-1" 
-  .modal-dialog
-    .modal-content
-      .modal-header
-        button.close data-dismiss="modal" type="button" 
-          span aria-text="true"  &times;
-          span.sr-only Close
-        center  
-          h4#ItemOrderModalLabel.modal-title 
-            | Заказ  
-            .dropdown.animated.fadeInDown.animation-delay-11
-              a.dropdown-toggle data-toggle="dropdown" href="#" 
-                = @item.title
-              .dropdown-menu.dropdown-menu-right.dropdown-call-box.animated.fadeInUp
-                - @items.each do |i|
-                  = link_to i.title, order_new_path(id: i.id), class: "btn btn-default",method: :get, remote: true
-        ul.nav.nav-tabs role="tablist" 
-          li.active
-            a data-toggle="tab" href="#payment1-tab" role="tab"  Наложный платёж
-          li
-            a data-toggle="tab" href="#payment2-tab" role="tab"  Предоплата
-      .modal-body
-        .tab-content
-          #payment1-tab.tab-pane.active  
-            center  
-              = form_tag order_create_path(id: @item.id), method: :get,remote: true do
-                = text_field_tag :name, nil, placeholder: "Ф.И.О"
-                = text_field_tag :email, nil, placeholder: "E-mail"
-                = text_field_tag :phone, nil, placeholder: "Телефон"
-                = text_field_tag :city, nil, placeholder: "Город"
-                = text_field_tag :index, nil, placeholder: "Почтовый индекс"
-                = text_field_tag :adress, nil, placeholder: "Адрес доставки"
-                = text_area_tag :comment, nil, placeholder: "Комментарий"
-                = hidden_field_tag :payment, "Наложный платёж"
-                = submit_tag 'Наложный платёж', class: "btn btn-default", disable_with: 'Наложный платёж'
-          #payment2-tab.tab-pane
-            center     
-              = form_tag order_create_path(id: @item.id), method: :get,remote: true do
-                = text_field_tag :name, nil, placeholder: "Ф.И.О"
-                = text_field_tag :email, nil, placeholder: "E-mail"
-                = text_field_tag :phone, nil, placeholder: "Телефон"
-                = text_field_tag :city, nil, placeholder: "Город"
-                = text_field_tag :index, nil, placeholder: "Почтовый индекс"
-                = text_field_tag :adress, nil, placeholder: "Адрес доставки"
-                = text_area_tag :comment, nil, placeholder: "Комментарий"
-                = hidden_field_tag :payment, "Предоплата"
-                = hidden_field_tag :item, @item.id
-                = submit_tag 'Предоплата', class: "btn btn-default", disable_with: 'Предоплата'
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close data-dismiss="modal" type="button" 
+					span aria-text="true"  &times;
+					span.sr-only Close
+				center  
+					h4#ItemOrderModalLabel.modal-title 
+						| Заказ  
+						.dropdown.animated.fadeInDown.animation-delay-11
+							a.dropdown-toggle data-toggle="dropdown" href="#" 
+								= @item.title
+							.dropdown-menu.dropdown-menu-right.dropdown-call-box.animated.fadeInUp
+								- @items.each do |i|
+									= link_to i.title, order_new_path(id: i.id), class: "btn btn-default",method: :get, remote: true
+				ul.nav.nav-tabs role="tablist" 
+					li.active
+						a data-toggle="tab" href="#payment1-tab" role="tab"  Наложный платёж
+					li
+						a data-toggle="tab" href="#payment2-tab" role="tab"  Предоплата
+			.modal-body
+				.tab-content
+					#payment1-tab.tab-pane.active  
+						center  
+							= form_tag order_create_path(id: @item.id), method: :get,remote: true do
+								= text_field_tag :name, nil, placeholder: "Ф.И.О"
+								= text_field_tag :email, nil, placeholder: "E-mail"
+								= text_field_tag :phone, nil, placeholder: "Телефон"
+								= text_field_tag :city, nil, placeholder: "Город"
+								= text_field_tag :index, nil, placeholder: "Почтовый индекс"
+								= text_field_tag :adress, nil, placeholder: "Адрес доставки"
+								= text_area_tag :comment, nil, placeholder: "Комментарий"
+								= hidden_field_tag :payment, "Наложный платёж"
+								= submit_tag 'Наложный платёж', class: "btn btn-default", disable_with: 'Наложный платёж'
+					#payment2-tab.tab-pane
+						center     
+							= form_tag order_create_path(id: @item.id), method: :get,remote: true do
+								= text_field_tag :name, nil, placeholder: "Ф.И.О"
+								= text_field_tag :email, nil, placeholder: "E-mail"
+								= text_field_tag :phone, nil, placeholder: "Телефон"
+								= text_field_tag :city, nil, placeholder: "Город"
+								= text_field_tag :index, nil, placeholder: "Почтовый индекс"
+								= text_field_tag :adress, nil, placeholder: "Адрес доставки"
+								= text_area_tag :comment, nil, placeholder: "Комментарий"
+								= hidden_field_tag :payment, "Предоплата"
+								= hidden_field_tag :item, @item.id
+								= submit_tag 'Предоплата', class: "btn btn-default", disable_with: 'Предоплата'
 
-        
-      .modal-footer
-          .pull-left
-            | Цена:  
-            = @item.price.to_i
-            |  
-            i.fa.fa-rub
-          button.btn.btn-primary data-dismiss="modal" type="button"  Закрыть
+				
+			.modal-footer
+					.pull-left
+						| Цена:  
+						= @item.price.to_i
+						|  
+						i.fa.fa-rub
+					button.btn.btn-primary data-dismiss="modal" type="button"  Закрыть
